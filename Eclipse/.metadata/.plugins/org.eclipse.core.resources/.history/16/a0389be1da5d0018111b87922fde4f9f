@@ -1,0 +1,113 @@
+import java.util.Stack;
+public class THanoi {
+
+	int[] source;
+	int[] dest;
+	int[] helper;
+	
+	
+	int size;
+	
+	THanoi(int size)
+	{
+		this.size = size;
+		source = new int[size];
+		dest = new int[size];
+		helper = new int[size];
+		
+		for(int i =0;i<size;i++)
+		{
+			source[i]= size-i;
+			dest[i]=0;
+			helper[i]=0;
+		}
+	}
+	
+	
+	
+	
+	public void display_all()
+	{
+		display("x",source);
+		display("y",dest);
+		display("z",helper);
+		
+	}
+	
+//	public int[] copyStack(int[] a)
+//	{
+//		int temp[] = new int[size];
+//		while(!a.isEmpty())
+//		{
+//			
+//		}
+//		return temp;
+//	}
+	
+	public void display(String name,int[] arr)
+	{
+		if(name=="")
+		{name="Unknown";}
+		System.out.print(name+"=");
+		for (int i = 0; i < arr.length; i++) 
+		{
+			System.out.print(arr[i]);
+			if(i<arr.length-1)
+			{System.out.print(",");}
+			
+		}
+		System.out.println();
+	}
+	
+	public int pop(int[] arr)
+	{
+		int temp  = -1;
+		for (int i = 0; i < arr.length; i++) {
+			if(arr[i]==0)
+			{
+				if(i>=1)
+				{
+				temp = arr[i-1];
+				arr[i-1]=0;
+				return temp;
+				}
+			}
+		}
+		return temp;
+	}
+	
+	public void push(int[] arr,int val)
+	{
+		for (int i = 0; i < arr.length; i++) {
+			
+			if(arr[i]==0)
+			{
+				arr[i]=val;
+			}
+		}
+	}
+	
+	public void SolveTowerOfHanoi(int n,int[] x,int[] y,int[] z)
+	{
+		if(n>=1)
+		{
+			SolveTowerOfHanoi(n-1,x,z,y);
+			int temp = pop(x);
+			push(y);
+//			display_all();
+			SolveTowerOfHanoi(n, z, y, x);			
+		}
+		
+	}
+	
+	public static void main(String[] args)
+	{
+		THanoi t = new THanoi(3);
+		
+//		t.SolveTowerOfHanoi(t.size, t.source, t.dest, t.helper);
+		t.display("source",t.source);
+		t.display("dest",t.dest);
+		t.display("helper",t.helper);
+	}
+	
+}

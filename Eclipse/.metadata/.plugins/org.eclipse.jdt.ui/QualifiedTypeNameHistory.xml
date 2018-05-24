@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="AnotherPkg.ScientificCalculator"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="Base.Calculator"/>
+    <fullyQualifiedTypeName name="org.omg.CORBA.PUBLIC_MEMBER"/>
+    <fullyQualifiedTypeName name="javax.swing.JButton"/>
+    <fullyQualifiedTypeName name="java.awt.event.ActionListener"/>
+    <fullyQualifiedTypeName name="javafx.scene.text.Text"/>
+    <fullyQualifiedTypeName name="javax.swing.JTextField"/>
+    <fullyQualifiedTypeName name="TowerOfHanoi"/>
+    <fullyQualifiedTypeName name="java.util.Hashtable"/>
+</qualifiedTypeNameHistroy>

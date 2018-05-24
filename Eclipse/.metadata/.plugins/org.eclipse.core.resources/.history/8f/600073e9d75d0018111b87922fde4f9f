@@ -1,0 +1,55 @@
+import java.util.*;
+public class TowerOfHanoi {
+
+	Stack<Integer> source;
+	Stack<Integer> dest;
+	Stack<Integer> helper;
+	int size;
+	
+	TowerOfHanoi(int size)
+	{
+		this.size = size;
+		source = new Stack<Integer>();
+		dest = new Stack<Integer>();
+		helper = new Stack<Integer>();
+		
+		for(int i =0;i<size;i++)
+		{
+			source.push(size-i);
+		}
+	}
+	
+	
+	
+	public void display(Stack<Integer> arr)
+	{
+		System.out.print("Values=");
+		while(!arr.isEmpty())
+		{
+			System.out.print(arr.pop()",");
+			
+		}
+		System.out.println();
+	}
+	
+	public void SolveTowerOfHanoi(int n,int x[],int y[],int z[])
+	{
+		if(n>=1)
+		{
+			SolveTowerOfHanoi(n-1,x,z,y);
+			
+		}
+		
+	}
+	
+	public static void main(String[] args)
+	{
+		TowerOfHanoi t = new TowerOfHanoi(3);
+		
+		
+		t.display(t.source);
+		t.display(t.dest);
+		t.display(t.helper);
+	}
+	
+}

@@ -1,0 +1,41 @@
+
+public class TowerOfHanoi {
+
+	int source[];
+	int dest[];
+	int helper[];
+	int size;
+	
+	TowerOfHanoi(int size)
+	{
+		this.size = size;
+		source = new int[size];
+		dest = new int[size];
+		helper = new int[size];
+		
+		for(int i =0;i<size;i++)
+		{
+			source[i]=size-i;			
+		}
+	}
+	
+	
+	
+	public void display(int arr[])
+	{
+		System.out.print("Values=");
+		for(int i=0;i<size;i++)
+		{
+			System.out.print(arr[i]+",");
+		}
+	}
+	
+	public static void main(String[] args)
+	{
+		TowerOfHanoi t = new TowerOfHanoi(3);
+		t.display(t.source);
+		t.display(t.dest);
+		t.display(t.helper);
+	}
+	
+}

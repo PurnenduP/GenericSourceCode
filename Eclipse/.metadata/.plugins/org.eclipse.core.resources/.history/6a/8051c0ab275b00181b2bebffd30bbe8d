@@ -1,0 +1,196 @@
+package Base;
+import java.awt.*;
+import java.awt.event.*;
+import java.applet.*;
+/*
+<applet code="MouseEvents" width=300 height=100>
+</applet>
+*/
+@SuppressWarnings("serial")
+public class SampleFrame extends Frame
+implements WindowListener,MouseListener,MouseMotionListener{
+	
+	String msg = "Start";
+	int mouseX=10,mouseY=40;
+	int moveX=0,moveY=0;
+	
+	SampleFrame(String title)
+	{
+		super(title);
+		//MyWindowAdapter ma = new MyWindowAdapter(this);
+		addWindowListener(this);
+		addMouseListener(this);
+		addMouseMotionListener(this);
+	}
+	
+	
+	
+	public void paint(Graphics g)
+	{
+		g.drawString(msg, mouseX, mouseY);
+		g.drawString("Mouse at " + moveX + ", " + moveY, 10, 40);
+	}
+	public static void main(String[] args)
+	{
+		SampleFrame win = new SampleFrame("HelloWindow");
+		win.setSize(250,250);
+		win.setVisible(true);
+	}
+
+
+
+	@Override
+	public void mouseDragged(MouseEvent me) {
+		// TODO Auto-generated method stub
+		moveX=me.getX();
+		moveY=me.getY();
+
+	msg="Mouse is getting Dragged";
+	repaint();
+		
+	}
+
+
+
+	@Override
+	public void mouseMoved(MouseEvent me) {
+		// TODO Auto-generated method stub
+		moveX=me.getX();
+		moveY=me.getY();
+		mouseX=me.getX();
+		mouseY=me.getY();
+		msg="MouseMoved";
+		repaint();
+	}
+
+
+
+	@Override
+	public void mouseClicked(MouseEvent me) {
+		// TODO Auto-generated method stub
+		moveX=me.getX();
+		moveY=me.getY();
+		msg="MouseGotClicked";
+		repaint();
+	}
+
+
+
+	@Override
+	public void mouseEntered(MouseEvent me) {
+		// TODO Auto-generated method stub
+		mouseX=10;
+		mouseY=54;
+		msg="Mouse Just entered window";
+		repaint();
+	}
+
+
+
+	@Override
+	public void mouseExited(MouseEvent me) {
+		// TODO Auto-generated method stub
+		
+		moveX=me.getX();
+		moveY=me.getY();
+		msg="MouseExited";
+		repaint();
+	}
+
+
+
+	@Override
+	public void mousePressed(MouseEvent me) {
+		// TODO Auto-generated method stub
+		moveX=me.getX();
+		moveY=me.getY();
+		msg="Mouse Pressed";
+		repaint();
+	}
+
+
+
+	@Override
+	public void mouseReleased(MouseEvent me) {
+		// TODO Auto-generated method stub
+		moveX=me.getX();
+		moveY=me.getY();
+		mouseY=me.getY()+10;
+		msg="Mouse Released";
+		repaint();
+		
+	}
+
+
+
+	@Override
+	public void windowActivated(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void windowClosed(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		//this.setVisible(false);
+	}
+
+
+
+	@Override
+	public void windowClosing(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		System.exit(0);
+	}
+
+
+
+	@Override
+	public void windowDeactivated(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void windowDeiconified(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void windowIconified(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void windowOpened(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}
+
+class MyWindowAdapter extends WindowAdapter
+{
+	SampleFrame sf;
+	
+	MyWindowAdapter(SampleFrame sf1)
+	{
+		this.sf = sf1;
+	}
+	
+	public void windowClosing(WindowEvent we)
+	{
+		sf.setVisible(false);
+	}
+	
+}
