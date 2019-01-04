@@ -1,0 +1,370 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EMPDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="courses">
+          <Key>
+            <PropertyRef Name="course_id" />
+          </Key>
+          <Property Name="course_id" Type="int" Nullable="false" />
+          <Property Name="course_name" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="databaselog">
+          <Key>
+            <PropertyRef Name="log_id" />
+          </Key>
+          <Property Name="log_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="log_msg" Type="nvarchar(max)" />
+          <Property Name="last_added" Type="datetime" />
+        </EntityType>
+        <EntityType Name="dept">
+          <Key>
+            <PropertyRef Name="dept_id" />
+          </Key>
+          <Property Name="dept_id" Type="int" Nullable="false" />
+          <Property Name="dept_name" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="emp_courses">
+          <Key>
+            <PropertyRef Name="emp_id" />
+            <PropertyRef Name="course_id" />
+          </Key>
+          <Property Name="emp_id" Type="int" Nullable="false" />
+          <Property Name="course_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="employee">
+          <Key>
+            <PropertyRef Name="emp_id" />
+          </Key>
+          <Property Name="emp_id" Type="int" Nullable="false" />
+          <Property Name="mgr_id" Type="int" />
+          <Property Name="emp_name" Type="nvarchar" MaxLength="100" />
+          <Property Name="dept_id" Type="int" Nullable="false" />
+          <Property Name="dob" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ins_courses">
+          <Key>
+            <PropertyRef Name="ins_id" />
+            <PropertyRef Name="course_id" />
+          </Key>
+          <Property Name="ins_id" Type="int" Nullable="false" />
+          <Property Name="course_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="instructor">
+          <Key>
+            <PropertyRef Name="ins_id" />
+          </Key>
+          <Property Name="ins_id" Type="int" Nullable="false" />
+          <Property Name="ins_name" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="fk_course_id">
+          <End Role="courses" Type="Self.courses" Multiplicity="1" />
+          <End Role="emp_courses" Type="Self.emp_courses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="courses">
+              <PropertyRef Name="course_id" />
+            </Principal>
+            <Dependent Role="emp_courses">
+              <PropertyRef Name="course_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_dept">
+          <End Role="dept" Type="Self.dept" Multiplicity="1" />
+          <End Role="employee" Type="Self.employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="dept">
+              <PropertyRef Name="dept_id" />
+            </Principal>
+            <Dependent Role="employee">
+              <PropertyRef Name="dept_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_emp_id">
+          <End Role="employee" Type="Self.employee" Multiplicity="1" />
+          <End Role="emp_courses" Type="Self.emp_courses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employee">
+              <PropertyRef Name="emp_id" />
+            </Principal>
+            <Dependent Role="emp_courses">
+              <PropertyRef Name="emp_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ins_courses_course_id">
+          <End Role="courses" Type="Self.courses" Multiplicity="1" />
+          <End Role="ins_courses" Type="Self.ins_courses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="courses">
+              <PropertyRef Name="course_id" />
+            </Principal>
+            <Dependent Role="ins_courses">
+              <PropertyRef Name="course_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ins_courses_ins_id">
+          <End Role="instructor" Type="Self.instructor" Multiplicity="1" />
+          <End Role="ins_courses" Type="Self.ins_courses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="instructor">
+              <PropertyRef Name="ins_id" />
+            </Principal>
+            <Dependent Role="ins_courses">
+              <PropertyRef Name="ins_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_mgr_id">
+          <End Role="employee" Type="Self.employee" Multiplicity="0..1" />
+          <End Role="employee1" Type="Self.employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employee">
+              <PropertyRef Name="emp_id" />
+            </Principal>
+            <Dependent Role="employee1">
+              <PropertyRef Name="mgr_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="delete_emp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="emp_id" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="EMPDBModelStoreContainer">
+          <EntitySet Name="courses" EntityType="Self.courses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="databaselog" EntityType="Self.databaselog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dept" EntityType="Self.dept" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="emp_courses" EntityType="Self.emp_courses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="employee" EntityType="Self.employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ins_courses" EntityType="Self.ins_courses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="instructor" EntityType="Self.instructor" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_course_id" Association="Self.fk_course_id">
+            <End Role="courses" EntitySet="courses" />
+            <End Role="emp_courses" EntitySet="emp_courses" />
+          </AssociationSet>
+          <AssociationSet Name="fk_dept" Association="Self.fk_dept">
+            <End Role="dept" EntitySet="dept" />
+            <End Role="employee" EntitySet="employee" />
+          </AssociationSet>
+          <AssociationSet Name="fk_emp_id" Association="Self.fk_emp_id">
+            <End Role="employee" EntitySet="employee" />
+            <End Role="emp_courses" EntitySet="emp_courses" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ins_courses_course_id" Association="Self.fk_ins_courses_course_id">
+            <End Role="courses" EntitySet="courses" />
+            <End Role="ins_courses" EntitySet="ins_courses" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ins_courses_ins_id" Association="Self.fk_ins_courses_ins_id">
+            <End Role="instructor" EntitySet="instructor" />
+            <End Role="ins_courses" EntitySet="ins_courses" />
+          </AssociationSet>
+          <AssociationSet Name="fk_mgr_id" Association="Self.fk_mgr_id">
+            <End Role="employee" EntitySet="employee" />
+            <End Role="employee1" EntitySet="employee" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EMPDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="courses">
+          <Key>
+            <PropertyRef Name="course_id" />
+          </Key>
+          <Property Name="course_id" Type="Int32" Nullable="false" />
+          <Property Name="course_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="employee" Relationship="Self.emp_courses" FromRole="courses" ToRole="employee" />
+          <NavigationProperty Name="instructor" Relationship="Self.ins_courses" FromRole="courses" ToRole="instructor" />
+        </EntityType>
+        <EntityType Name="dept">
+          <Key>
+            <PropertyRef Name="dept_id" />
+          </Key>
+          <Property Name="dept_id" Type="Int32" Nullable="false" />
+          <Property Name="dept_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="employee" Relationship="Self.fk_dept" FromRole="dept" ToRole="employee" />
+        </EntityType>
+        <EntityType Name="employee">
+          <Key>
+            <PropertyRef Name="emp_id" />
+          </Key>
+          <Property Name="emp_id" Type="Int32" Nullable="false" />
+          <Property Name="mgr_id" Type="Int32" />
+          <Property Name="emp_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="dept_id" Type="Int32" Nullable="false" />
+          <Property Name="dob" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="dept" Relationship="Self.fk_dept" FromRole="employee" ToRole="dept" />
+          <NavigationProperty Name="employee1" Relationship="Self.fk_mgr_id" FromRole="employee" ToRole="employee1" />
+          <NavigationProperty Name="employee2" Relationship="Self.fk_mgr_id" FromRole="employee1" ToRole="employee" />
+          <NavigationProperty Name="courses" Relationship="Self.emp_courses" FromRole="employee" ToRole="courses" />
+        </EntityType>
+        <EntityType Name="instructor">
+          <Key>
+            <PropertyRef Name="ins_id" />
+          </Key>
+          <Property Name="ins_id" Type="Int32" Nullable="false" />
+          <Property Name="ins_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="courses" Relationship="Self.ins_courses" FromRole="instructor" ToRole="courses" />
+        </EntityType>
+        <Association Name="fk_dept">
+          <End Role="dept" Type="Self.dept" Multiplicity="1" />
+          <End Role="employee" Type="Self.employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="dept">
+              <PropertyRef Name="dept_id" />
+            </Principal>
+            <Dependent Role="employee">
+              <PropertyRef Name="dept_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_mgr_id">
+          <End Role="employee" Type="Self.employee" Multiplicity="0..1" />
+          <End Role="employee1" Type="Self.employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employee">
+              <PropertyRef Name="emp_id" />
+            </Principal>
+            <Dependent Role="employee1">
+              <PropertyRef Name="mgr_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="emp_courses">
+          <End Role="courses" Type="Self.courses" Multiplicity="*" />
+          <End Role="employee" Type="Self.employee" Multiplicity="*" />
+        </Association>
+        <Association Name="ins_courses">
+          <End Role="courses" Type="Self.courses" Multiplicity="*" />
+          <End Role="instructor" Type="Self.instructor" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="EMPDBEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="courses" EntityType="Self.courses" />
+          <EntitySet Name="dept" EntityType="Self.dept" />
+          <EntitySet Name="employee" EntityType="Self.employee" />
+          <EntitySet Name="instructor" EntityType="Self.instructor" />
+          <AssociationSet Name="fk_dept" Association="Self.fk_dept">
+            <End Role="dept" EntitySet="dept" />
+            <End Role="employee" EntitySet="employee" />
+          </AssociationSet>
+          <AssociationSet Name="fk_mgr_id" Association="Self.fk_mgr_id">
+            <End Role="employee" EntitySet="employee" />
+            <End Role="employee1" EntitySet="employee" />
+          </AssociationSet>
+          <AssociationSet Name="emp_courses" Association="Self.emp_courses">
+            <End Role="courses" EntitySet="courses" />
+            <End Role="employee" EntitySet="employee" />
+          </AssociationSet>
+          <AssociationSet Name="ins_courses" Association="Self.ins_courses">
+            <End Role="courses" EntitySet="courses" />
+            <End Role="instructor" EntitySet="instructor" />
+          </AssociationSet>
+          <FunctionImport Name="delete_emp">
+          <Parameter Name="emp_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="databaselog" EntityType="EMPDBModel.databaselog" />
+        </EntityContainer>
+        <EntityType Name="databaselog">
+          <Key>
+            <PropertyRef Name="log_id" />
+          </Key>
+          <Property Name="log_id" Type="Int32" Nullable="false" />
+          <Property Name="log_msg" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="last_added" Type="DateTime" Precision="3" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EMPDBModelStoreContainer" CdmEntityContainer="EMPDBEntities2">
+          <EntitySetMapping Name="courses">
+            <EntityTypeMapping TypeName="EMPDBModel.courses">
+              <MappingFragment StoreEntitySet="courses">
+                <ScalarProperty Name="course_id" ColumnName="course_id" />
+                <ScalarProperty Name="course_name" ColumnName="course_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dept">
+            <EntityTypeMapping TypeName="EMPDBModel.dept">
+              <MappingFragment StoreEntitySet="dept">
+                <ScalarProperty Name="dept_id" ColumnName="dept_id" />
+                <ScalarProperty Name="dept_name" ColumnName="dept_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="employee">
+            <EntityTypeMapping TypeName="EMPDBModel.employee">
+              <MappingFragment StoreEntitySet="employee">
+                <ScalarProperty Name="emp_id" ColumnName="emp_id" />
+                <ScalarProperty Name="mgr_id" ColumnName="mgr_id" />
+                <ScalarProperty Name="emp_name" ColumnName="emp_name" />
+                <ScalarProperty Name="dept_id" ColumnName="dept_id" />
+                <ScalarProperty Name="dob" ColumnName="dob" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="instructor">
+            <EntityTypeMapping TypeName="EMPDBModel.instructor">
+              <MappingFragment StoreEntitySet="instructor">
+                <ScalarProperty Name="ins_id" ColumnName="ins_id" />
+                <ScalarProperty Name="ins_name" ColumnName="ins_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="emp_courses" TypeName="EMPDBModel.emp_courses" StoreEntitySet="emp_courses">
+            <EndProperty Name="courses">
+              <ScalarProperty Name="course_id" ColumnName="course_id" />
+            </EndProperty>
+            <EndProperty Name="employee">
+              <ScalarProperty Name="emp_id" ColumnName="emp_id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="ins_courses" TypeName="EMPDBModel.ins_courses" StoreEntitySet="ins_courses">
+            <EndProperty Name="courses">
+              <ScalarProperty Name="course_id" ColumnName="course_id" />
+            </EndProperty>
+            <EndProperty Name="instructor">
+              <ScalarProperty Name="ins_id" ColumnName="ins_id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="delete_emp" FunctionName="EMPDBModel.Store.delete_emp" />
+          <EntitySetMapping Name="databaselog">
+            <EntityTypeMapping TypeName="EMPDBModel.databaselog">
+              <MappingFragment StoreEntitySet="databaselog">
+                <ScalarProperty Name="last_added" ColumnName="last_added" />
+                <ScalarProperty Name="log_msg" ColumnName="log_msg" />
+                <ScalarProperty Name="log_id" ColumnName="log_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

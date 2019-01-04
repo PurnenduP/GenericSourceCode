@@ -1,0 +1,12 @@
+C:\Users\india\source\repos\EF_Learning\EF_Learning\bin\Debug\EF_Learning.exe.config
+C:\Users\india\source\repos\EF_Learning\EF_Learning\bin\Debug\EF_Learning.exe
+C:\Users\india\source\repos\EF_Learning\EF_Learning\bin\Debug\EF_Learning.pdb
+C:\Users\india\source\repos\EF_Learning\EF_Learning\bin\Debug\EntityFramework.dll
+C:\Users\india\source\repos\EF_Learning\EF_Learning\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\india\source\repos\EF_Learning\EF_Learning\bin\Debug\EntityFramework.xml
+C:\Users\india\source\repos\EF_Learning\EF_Learning\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\india\source\repos\EF_Learning\EF_Learning\obj\Debug\EF_Learning.csprojAssemblyReference.cache
+C:\Users\india\source\repos\EF_Learning\EF_Learning\obj\Debug\EF_Learning.csproj.CoreCompileInputs.cache
+C:\Users\india\source\repos\EF_Learning\EF_Learning\obj\Debug\EF_Learning.csproj.CopyComplete
+C:\Users\india\source\repos\EF_Learning\EF_Learning\obj\Debug\EF_Learning.exe
+C:\Users\india\source\repos\EF_Learning\EF_Learning\obj\Debug\EF_Learning.pdb

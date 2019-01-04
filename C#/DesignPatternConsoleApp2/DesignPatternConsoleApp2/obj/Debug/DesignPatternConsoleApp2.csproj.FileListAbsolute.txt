@@ -1,0 +1,7 @@
+c:\users\india\source\repos\DesignPatternConsoleApp2\DesignPatternConsoleApp2\bin\Debug\DesignPatternConsoleApp2.exe.config
+c:\users\india\source\repos\DesignPatternConsoleApp2\DesignPatternConsoleApp2\bin\Debug\DesignPatternConsoleApp2.exe
+c:\users\india\source\repos\DesignPatternConsoleApp2\DesignPatternConsoleApp2\bin\Debug\DesignPatternConsoleApp2.pdb
+c:\users\india\source\repos\DesignPatternConsoleApp2\DesignPatternConsoleApp2\obj\Debug\DesignPatternConsoleApp2.csprojAssemblyReference.cache
+c:\users\india\source\repos\DesignPatternConsoleApp2\DesignPatternConsoleApp2\obj\Debug\DesignPatternConsoleApp2.csproj.CoreCompileInputs.cache
+c:\users\india\source\repos\DesignPatternConsoleApp2\DesignPatternConsoleApp2\obj\Debug\DesignPatternConsoleApp2.exe
+c:\users\india\source\repos\DesignPatternConsoleApp2\DesignPatternConsoleApp2\obj\Debug\DesignPatternConsoleApp2.pdb

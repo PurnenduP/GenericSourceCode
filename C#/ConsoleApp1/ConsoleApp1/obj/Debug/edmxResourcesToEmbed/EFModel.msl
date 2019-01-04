@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="EMPDBModelStoreContainer" CdmEntityContainer="EMPDBEntities2">
+    <EntitySetMapping Name="courses">
+      <EntityTypeMapping TypeName="EMPDBModel.courses">
+        <MappingFragment StoreEntitySet="courses">
+          <ScalarProperty Name="course_id" ColumnName="course_id" />
+          <ScalarProperty Name="course_name" ColumnName="course_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="dept">
+      <EntityTypeMapping TypeName="EMPDBModel.dept">
+        <MappingFragment StoreEntitySet="dept">
+          <ScalarProperty Name="dept_id" ColumnName="dept_id" />
+          <ScalarProperty Name="dept_name" ColumnName="dept_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="employee">
+      <EntityTypeMapping TypeName="EMPDBModel.employee">
+        <MappingFragment StoreEntitySet="employee">
+          <ScalarProperty Name="emp_id" ColumnName="emp_id" />
+          <ScalarProperty Name="mgr_id" ColumnName="mgr_id" />
+          <ScalarProperty Name="emp_name" ColumnName="emp_name" />
+          <ScalarProperty Name="dept_id" ColumnName="dept_id" />
+          <ScalarProperty Name="dob" ColumnName="dob" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="instructor">
+      <EntityTypeMapping TypeName="EMPDBModel.instructor">
+        <MappingFragment StoreEntitySet="instructor">
+          <ScalarProperty Name="ins_id" ColumnName="ins_id" />
+          <ScalarProperty Name="ins_name" ColumnName="ins_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="emp_courses" TypeName="EMPDBModel.emp_courses" StoreEntitySet="emp_courses">
+      <EndProperty Name="courses">
+        <ScalarProperty Name="course_id" ColumnName="course_id" />
+      </EndProperty>
+      <EndProperty Name="employee">
+        <ScalarProperty Name="emp_id" ColumnName="emp_id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ins_courses" TypeName="EMPDBModel.ins_courses" StoreEntitySet="ins_courses">
+      <EndProperty Name="courses">
+        <ScalarProperty Name="course_id" ColumnName="course_id" />
+      </EndProperty>
+      <EndProperty Name="instructor">
+        <ScalarProperty Name="ins_id" ColumnName="ins_id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <FunctionImportMapping FunctionImportName="delete_emp" FunctionName="EMPDBModel.Store.delete_emp" />
+    <EntitySetMapping Name="databaselog">
+      <EntityTypeMapping TypeName="EMPDBModel.databaselog">
+        <MappingFragment StoreEntitySet="databaselog">
+          <ScalarProperty Name="last_added" ColumnName="last_added" />
+          <ScalarProperty Name="log_msg" ColumnName="log_msg" />
+          <ScalarProperty Name="log_id" ColumnName="log_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

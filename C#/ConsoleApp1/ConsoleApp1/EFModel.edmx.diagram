@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c82e375d430444c7a4a8a25d645a2425" Name="Diagram1">
+        <EntityTypeShape EntityType="EMPDBModel.courses" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EMPDBModel.dept" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EMPDBModel.employee" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EMPDBModel.instructor" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
+        <AssociationConnector Association="EMPDBModel.fk_dept" ManuallyRouted="false" />
+        <AssociationConnector Association="EMPDBModel.fk_mgr_id" ManuallyRouted="false" />
+        <AssociationConnector Association="EMPDBModel.emp_courses" ManuallyRouted="false" />
+        <AssociationConnector Association="EMPDBModel.ins_courses" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="EMPDBModel.databaselog" Width="1.5" PointX="3.375" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

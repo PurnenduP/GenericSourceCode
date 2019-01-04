@@ -1,0 +1,8 @@
+C:\Users\india\source\repos\EF1\EF1\bin\Debug\netcoreapp2.0\EF1.deps.json
+C:\Users\india\source\repos\EF1\EF1\bin\Debug\netcoreapp2.0\EF1.runtimeconfig.json
+C:\Users\india\source\repos\EF1\EF1\bin\Debug\netcoreapp2.0\EF1.runtimeconfig.dev.json
+C:\Users\india\source\repos\EF1\EF1\bin\Debug\netcoreapp2.0\EF1.dll
+C:\Users\india\source\repos\EF1\EF1\obj\Debug\netcoreapp2.0\EF1.csprojAssemblyReference.cache
+C:\Users\india\source\repos\EF1\EF1\obj\Debug\netcoreapp2.0\EF1.csproj.CoreCompileInputs.cache
+C:\Users\india\source\repos\EF1\EF1\obj\Debug\netcoreapp2.0\EF1.AssemblyInfoInputs.cache
+C:\Users\india\source\repos\EF1\EF1\obj\Debug\netcoreapp2.0\EF1.AssemblyInfo.cs

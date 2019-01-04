@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EMPDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="courses">
+    <Key>
+      <PropertyRef Name="course_id" />
+    </Key>
+    <Property Name="course_id" Type="Int32" Nullable="false" />
+    <Property Name="course_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="employee" Relationship="Self.emp_courses" FromRole="courses" ToRole="employee" />
+    <NavigationProperty Name="instructor" Relationship="Self.ins_courses" FromRole="courses" ToRole="instructor" />
+  </EntityType>
+  <EntityType Name="dept">
+    <Key>
+      <PropertyRef Name="dept_id" />
+    </Key>
+    <Property Name="dept_id" Type="Int32" Nullable="false" />
+    <Property Name="dept_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="employee" Relationship="Self.fk_dept" FromRole="dept" ToRole="employee" />
+  </EntityType>
+  <EntityType Name="employee">
+    <Key>
+      <PropertyRef Name="emp_id" />
+    </Key>
+    <Property Name="emp_id" Type="Int32" Nullable="false" />
+    <Property Name="mgr_id" Type="Int32" />
+    <Property Name="emp_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="dept_id" Type="Int32" Nullable="false" />
+    <Property Name="dob" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="dept" Relationship="Self.fk_dept" FromRole="employee" ToRole="dept" />
+    <NavigationProperty Name="employee1" Relationship="Self.fk_mgr_id" FromRole="employee" ToRole="employee1" />
+    <NavigationProperty Name="employee2" Relationship="Self.fk_mgr_id" FromRole="employee1" ToRole="employee" />
+    <NavigationProperty Name="courses" Relationship="Self.emp_courses" FromRole="employee" ToRole="courses" />
+  </EntityType>
+  <EntityType Name="instructor">
+    <Key>
+      <PropertyRef Name="ins_id" />
+    </Key>
+    <Property Name="ins_id" Type="Int32" Nullable="false" />
+    <Property Name="ins_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="courses" Relationship="Self.ins_courses" FromRole="instructor" ToRole="courses" />
+  </EntityType>
+  <Association Name="fk_dept">
+    <End Role="dept" Type="Self.dept" Multiplicity="1" />
+    <End Role="employee" Type="Self.employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="dept">
+        <PropertyRef Name="dept_id" />
+      </Principal>
+      <Dependent Role="employee">
+        <PropertyRef Name="dept_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_mgr_id">
+    <End Role="employee" Type="Self.employee" Multiplicity="0..1" />
+    <End Role="employee1" Type="Self.employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee">
+        <PropertyRef Name="emp_id" />
+      </Principal>
+      <Dependent Role="employee1">
+        <PropertyRef Name="mgr_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="emp_courses">
+    <End Role="courses" Type="Self.courses" Multiplicity="*" />
+    <End Role="employee" Type="Self.employee" Multiplicity="*" />
+  </Association>
+  <Association Name="ins_courses">
+    <End Role="courses" Type="Self.courses" Multiplicity="*" />
+    <End Role="instructor" Type="Self.instructor" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="EMPDBEntities2" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="courses" EntityType="Self.courses" />
+    <EntitySet Name="dept" EntityType="Self.dept" />
+    <EntitySet Name="employee" EntityType="Self.employee" />
+    <EntitySet Name="instructor" EntityType="Self.instructor" />
+    <AssociationSet Name="fk_dept" Association="Self.fk_dept">
+      <End Role="dept" EntitySet="dept" />
+      <End Role="employee" EntitySet="employee" />
+    </AssociationSet>
+    <AssociationSet Name="fk_mgr_id" Association="Self.fk_mgr_id">
+      <End Role="employee" EntitySet="employee" />
+      <End Role="employee1" EntitySet="employee" />
+    </AssociationSet>
+    <AssociationSet Name="emp_courses" Association="Self.emp_courses">
+      <End Role="courses" EntitySet="courses" />
+      <End Role="employee" EntitySet="employee" />
+    </AssociationSet>
+    <AssociationSet Name="ins_courses" Association="Self.ins_courses">
+      <End Role="courses" EntitySet="courses" />
+      <End Role="instructor" EntitySet="instructor" />
+    </AssociationSet>
+    <FunctionImport Name="delete_emp">
+      <Parameter Name="emp_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="databaselog" EntityType="EMPDBModel.databaselog" />
+  </EntityContainer>
+  <EntityType Name="databaselog">
+    <Key>
+      <PropertyRef Name="log_id" />
+    </Key>
+    <Property Name="log_id" Type="Int32" Nullable="false" />
+    <Property Name="log_msg" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="last_added" Type="DateTime" Precision="3" />
+  </EntityType>
+</Schema>
